@@ -1,0 +1,13 @@
+/* Egen custom CSS här */
+
+
+#bild1{
+width: 40vw;
+height: 50vh;
+}
+
+#bild2{
+    width: 40vw;
+    height: 50vh;
+    float: right;
+}
