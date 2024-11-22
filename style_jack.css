@@ -33,3 +33,13 @@ body {
     font-size: 20px;
 }
 
+
+#canvas{
+    border: 2px solid black;
+    }
+
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}

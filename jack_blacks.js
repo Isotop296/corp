@@ -1,3 +1,9 @@
+
+let your_balance = 200;
+
+let win = 0;
+let loss = 0;
+
 let game_count = 0;
 
 
@@ -111,9 +117,11 @@ function stay() {
     let message = "";
     if (yourSum > 21) {
         message = "You Lose!";
+        loss +=1
     }
     else if (dealerSum > 21) {
         message = "You win!";
+        win +=1
     }
     //both you and dealer <= 21
     else if (yourSum == dealerSum) {
@@ -121,11 +129,14 @@ function stay() {
     }
     else if (yourSum > dealerSum) {
         message = "You Win!";
+        win +=1
     }
     else if (yourSum < dealerSum) {
         message = "You Lose!";
+        loss +=1
     }
-
+    console.log(win);
+    console.log(loss);
     document.getElementById("dealer-sum").innerText = dealerSum;
     document.getElementById("your-sum").innerText = yourSum;
     document.getElementById("results").innerText = message;
@@ -231,3 +242,35 @@ var myModal = document.getElementById('myModal')
         } else if (x == 1) {
             document.getElementById("message").innerHTML = `<p>You Win!!!!</p>`;
         }
+
+
+
+
+const ctx = document.getElementById('canvas');
+    
+
+const config = {
+    type: 'pie',
+    data: data,
+  };
+
+  const data = {
+    labels: [
+      'losses',
+      'wins'
+    ],
+    datasets: [{
+      label: 'My First Dataset',
+      data: [loss, win],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)'
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  new Chart(ctx, {
+    config,
+    data
+});
