@@ -36,10 +36,8 @@ body {
 
 #canvas{
     border: 2px solid black;
-    }
-
-
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
+    position: absolute;
+top: 20vh;    
 }
+
+    
