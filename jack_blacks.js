@@ -246,7 +246,7 @@ var myModal = document.getElementById('myModal')
 
 
 
-const ctx = document.getElementById('canvas');
+const ctx = document.getElementById('myChart');
     
 
 const config = {
