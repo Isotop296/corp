@@ -258,25 +258,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gambleButton.addEventListener("click", () => {
         let x = Math.floor(Math.random() * 2);
-
-        if (x === 0) {
-            modalMessage.innerHTML = `
-                <img src="/cards/gun_atscreen.png" alt="gun">
-                <p>You lose, give me all your money!!!!</p>
-            `;
-            your_balance *= 0.2;
-        } else if (x === 1) {
-            modalMessage.innerHTML = `<p>You Win!!!!</p>`;
-            your_balance *= 2;
-        }
-
+        updateModal()
         console.log("Your balance:", your_balance); // Debugging balance update
     });
 
     const tryAgainButton = document.getElementById("try-again");
     tryAgainButton.addEventListener("click", () => {
         modalMessage.innerHTML = `<p>Let's try again!</p>`;
+        let x = Math.floor(Math.random() * 2);
+        updateModal()
     });
 });
 
-    
+function updateModal() {
+    if (x === 0) {
+        modalMessage.innerHTML = `
+            <img src="/cards/gun_atscreen.png" alt="gun">
+            <p>You lose, give me all your money!!!!</p>
+        `;
+        your_balance *= 0.2;
+    } else if (x === 1) {
+        modalMessage.innerHTML = `<p>You Win!!!!</p>`;
+        your_balance *= 2;
+    }
+}
