@@ -1,43 +1,70 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-
-    
+    background-color: black;
+    color: green;
+    margin: 0;
+    padding: 0;
 }
 
-#dealer-cards img {
-    height: 175px;
-    width: 125px;
+h2, p, button {
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 0 0 5px green;
 }
 
-#your-cards img {
-    height: 175px;
-    width: 125px;
+button {
+    border: 2px solid green;
+    color: green;
+    background-color: black;
+    cursor: pointer;
+    padding: 10px;
+    transition: all 0.3s ease;
 }
 
-#hit {
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
+button:hover {
+    background-color: green;
+    color: black;
 }
 
-#stay {
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
-}
-
-#Next {
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
-}
-
-
-#canvas{
-    border: 2px solid black;
+.oponent {
     position: absolute;
-top: 20vh;    
+    top: 16vh;
+    left: 20px;
+    width: 250px;
+    height: auto;
+    filter: contrast(1.2) brightness(0.8) saturate(0.5);
+    border: 2px solid green;
+    padding: 10px;
+    background: #002a00; /* CRT effect */
+    box-shadow: 0 0 10px green, 0 0 20px green;
+    transform: rotateX(2deg) rotateY(-2deg); /* Adds a slight depth */
 }
 
+.oponent img {
+    width: 100%;
+    height: auto;
+}
+
+#dealer-cards, #your-cards {
+    display: inline-block;
     
+}
+
+#dealer-cards img, #your-cards img {
+    height: 175px;
+    width: 125px;
+}
+
+#canvas {
+    border: 2px solid green;
+    margin-top: 20px;
+    box-shadow: 0 0 10px green;
+}
+
+.bg-dark {
+    background-color: black !important;
+}
+
+.text-light {
+    color: green !important;
+}

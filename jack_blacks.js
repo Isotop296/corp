@@ -3,6 +3,7 @@ let your_balance = 200;
 
 let win = 0;
 let loss = 0;
+let tie = 0;
 
 let game_count = 0;
 
@@ -88,6 +89,7 @@ function startGame() {
     document.getElementById("stay").addEventListener("click", dealer_add);
     document.getElementById("Next").addEventListener("click", keep_going);
     console.log(game_count);
+    console.log(your_balance);
 }
 
 function hit() {
@@ -126,6 +128,7 @@ function stay() {
     //both you and dealer <= 21
     else if (yourSum == dealerSum) {
         message = "Tie!";
+        tie +=1
     }
     else if (yourSum > dealerSum) {
         message = "You Win!";
@@ -140,6 +143,7 @@ function stay() {
     document.getElementById("dealer-sum").innerText = dealerSum;
     document.getElementById("your-sum").innerText = yourSum;
     document.getElementById("results").innerText = message;
+    updateChart();
 }
 
 function getValue(card) {
@@ -219,58 +223,60 @@ function keep_going(){
     startGame() 
 }
 
+function updateChart() {
+    // Update the chart data with the latest win/loss values
+    myChart.data.datasets[0].data = [loss, win, tie];
+    myChart.update(); // Re-render the chart with updated data
+}
+var data = {
+    labels: ['Losses', 'Wins', 'tie'],
+    datasets: [{
+        label: 'Win/Loss/tie Statistics',
+        data: [loss, win, tie],
+        backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'],
+        hoverOffset: 4
+    }]
+};
+
+
+const ctx = document.getElementById('canvas').getContext('2d');
+canvas.width = 10;  
+canvas.height = 10; 
+
+var config = {
+    type: 'pie', 
+    data: data,
+};
+
+const myChart = new Chart(ctx, config); 
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const gambleButton = document.querySelector('[data-bs-toggle="modal"]');
+    const modalMessage = document.getElementById("message");
 
+    gambleButton.addEventListener("click", () => {
+        let x = Math.floor(Math.random() * 2);
 
-var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
-        
-        myModal.addEventListener('shown.bs.modal', function () {
-          myInput.focus()
-        })
-        let x = Math.floor((Math.random() * 2)); // Random number 0 or 1
-        document.getElementById("message").innerHTML = x;
-    
-        // Check if the player lost or won
-        if (x == 0) {
-            document.getElementById("message").innerHTML = `
+        if (x === 0) {
+            modalMessage.innerHTML = `
                 <img src="/cards/gun_atscreen.png" alt="gun">
                 <p>You lose, give me all your money!!!!</p>
             `;
-        } else if (x == 1) {
-            document.getElementById("message").innerHTML = `<p>You Win!!!!</p>`;
+            your_balance *= 0.2;
+        } else if (x === 1) {
+            modalMessage.innerHTML = `<p>You Win!!!!</p>`;
+            your_balance *= 2;
         }
 
+        console.log("Your balance:", your_balance); // Debugging balance update
+    });
 
-
-
-const ctx = document.getElementById('myChart');
-    
-
-const config = {
-    type: 'pie',
-    data: data,
-  };
-
-  const data = {
-    labels: [
-      'losses',
-      'wins'
-    ],
-    datasets: [{
-      label: 'My First Dataset',
-      data: [loss, win],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)'
-      ],
-      hoverOffset: 4
-    }]
-  };
-
-  new Chart(ctx, {
-    config,
-    data
+    const tryAgainButton = document.getElementById("try-again");
+    tryAgainButton.addEventListener("click", () => {
+        modalMessage.innerHTML = `<p>Let's try again!</p>`;
+    });
 });
+
+    
