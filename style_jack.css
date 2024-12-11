@@ -68,3 +68,29 @@ button:hover {
 .text-light {
     color: green !important;
 }
+
+
+#star {
+    transition: transform 1s ease-in-out, filter 1s ease-in-out;  
+    transform-origin: center; 
+  }
+  
+  .spin-and-glow {
+    animation: spinGlow 1s forwards;
+  }
+  
+  @keyframes spinGlow {
+    0% {
+      transform: rotate(0deg);
+      filter: brightness(1);
+    }
+    50% {
+      transform: rotate(180deg);
+      filter: brightness(2); 
+    }
+    100% {
+      transform: rotate(360deg);
+      filter: brightness(1); 
+    }
+  }
+  

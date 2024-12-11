@@ -4,6 +4,7 @@ let your_balance = 200;
 let win = 0;
 let loss = 0;
 let tie = 0;
+let consecutive_wins = 0;
 
 let game_count = 0;
 
@@ -18,7 +19,7 @@ let yourAceCount = 0;
 let hidden;
 let deck;
 
-let canHit = true; //allows the player (you) to draw while yourSum <= 21
+let canHit = true; 
 
 window.onload = function() {
     buildDeck();
@@ -120,24 +121,34 @@ function stay() {
     if (yourSum > 21) {
         message = "You Lose!";
         loss +=1
+        consecutive_wins = 0
     }
     else if (dealerSum > 21) {
         message = "You win!";
         win +=1
+        consecutive_wins += 1
     }
-    //both you and dealer <= 21
     else if (yourSum == dealerSum) {
         message = "Tie!";
         tie +=1
+        consecutive_wins = 0
     }
     else if (yourSum > dealerSum) {
         message = "You Win!";
         win +=1
+        consecutive_wins +=1
     }
     else if (yourSum < dealerSum) {
         message = "You Lose!";
         loss +=1
+        consecutive_wins = 0
     }
+
+    if (consecutive_wins >= 5) {
+        addStarImage();
+        consecutive_wins = 0
+    }
+
     console.log(win);
     console.log(loss);
     document.getElementById("dealer-sum").innerText = dealerSum;
@@ -222,11 +233,33 @@ function keep_going(){
 
     startGame() 
 }
+function addStarImage() {
+    const starContainer = document.getElementById("star-container"); 
+    const starImg = document.createElement("img");
+    
+    starImg.src = "./img/star.svg"; 
+    starImg.alt = "Star Award";
+    starImg.style.width = "50px";
+    starImg.style.height = "50px";
+
+    starContainer.appendChild(starImg);
+
+    starImg.classList.add("spin-and-glow");
+
+    setTimeout(() => {
+        starImg.classList.remove("spin-and-glow");
+    }, 1000);
+}
+
+
+
+
+
+
 
 function updateChart() {
-    // Update the chart data with the latest win/loss values
     myChart.data.datasets[0].data = [loss, win, tie];
-    myChart.update(); // Re-render the chart with updated data
+    myChart.update(); 
 }
 var data = {
     labels: ['Losses', 'Wins', 'tie'],
@@ -259,14 +292,13 @@ document.addEventListener("DOMContentLoaded", () => {
     gambleButton.addEventListener("click", () => {
         let x = Math.floor(Math.random() * 2);
         updateModal()
-        console.log("Your balance:", your_balance); // Debugging balance update
+        console.log("Your balance:", your_balance);
     });
 
     const tryAgainButton = document.getElementById("try-again");
     tryAgainButton.addEventListener("click", () => {
         modalMessage.innerHTML = `<p>Let's try again!</p>`;
         let x = Math.floor(Math.random() * 2);
-        updateModal()
     });
 });
 
