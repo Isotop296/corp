@@ -1,7 +1,7 @@
 
 body{
     background-color: #2B3644;
-    overflow-y: none;
+    overflow-y: hidden;
 }
 
 html{
@@ -281,7 +281,7 @@ html{
     flex-wrap: nowrap;
     gap: 2rem;
     overflow-x: scroll;
-    overflow-y: none;
+    overflow-y: hidden;
     scroll-behavior: smooth;
    padding-left: 6%;
    text-decoration: none;
